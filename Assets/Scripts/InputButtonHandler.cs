@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InputButtonHandler : MonoBehaviour
 {
     public Button selectedButton;
-    [SerializeField] Color selectedColour = Color.black;
+    [SerializeField] Color selectedColour;
     [SerializeField] Color defaultColour = Color.white;
 
     public void InputButtonClicked(Button button)
