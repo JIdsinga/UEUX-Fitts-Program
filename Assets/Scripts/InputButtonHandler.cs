@@ -7,7 +7,7 @@ public class InputButtonHandler : MonoBehaviour
 {
     public Button selectedButton;
     [SerializeField] Color selectedColour;
-    [SerializeField] Color defaultColour = Color.white;
+    [SerializeField] public Color defaultColour = Color.white;
 
     public void InputButtonClicked(Button button)
     {

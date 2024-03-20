@@ -16,9 +16,20 @@ public class ButtonHandler : MonoBehaviour
 
     void ActivateStartButton()
     {
-
         if (inputButtonHandler.selectedButton != null && consentToggle.isOn)
             startButton.interactable = true;
         else startButton.interactable = false;
+    }
+
+    public void ResetButtons()
+    {
+        inputButtonHandler.selectedButton.GetComponent<Image>().color = inputButtonHandler.defaultColour;
+        inputButtonHandler.selectedButton = null;
+        consentToggle.isOn = false;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
