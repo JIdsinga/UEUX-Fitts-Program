@@ -9,6 +9,7 @@ public class InputButtonHandler : MonoBehaviour
     [SerializeField] Color selectedColour;
     [SerializeField] public Color defaultColour = Color.white;
 
+    // Determines what menu button is selected and colours that button accordingly
     public void InputButtonClicked(Button button)
     {
         if (selectedButton == button)

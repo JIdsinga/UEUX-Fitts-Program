@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonHandler : MonoBehaviour
 {
+    // References
     [SerializeField] Button startButton;
     [SerializeField] InputButtonHandler inputButtonHandler;
     [SerializeField] Toggle consentToggle;
@@ -14,6 +15,7 @@ public class ButtonHandler : MonoBehaviour
         ActivateStartButton();
     }
 
+    // Allows the start button to be pressed when Consent is given and an Input Device is selected
     void ActivateStartButton()
     {
         if (inputButtonHandler.selectedButton != null && consentToggle.isOn)
@@ -21,6 +23,7 @@ public class ButtonHandler : MonoBehaviour
         else startButton.interactable = false;
     }
 
+    // Resets the button state to default
     public void ResetButtons()
     {
         inputButtonHandler.selectedButton.GetComponent<Image>().color = inputButtonHandler.defaultColour;
@@ -28,6 +31,7 @@ public class ButtonHandler : MonoBehaviour
         consentToggle.isOn = false;
     }
 
+    // Allows for quiting of the application
     public void Quit()
     {
         Application.Quit();

@@ -41,6 +41,7 @@ public class FittsButtonHandler : MonoBehaviour
 
     private Camera camera;
 
+    // Runs before first frame, Used for data initialization and default set-up
     void Start()
     {
         currentButton = middleButton;
@@ -59,15 +60,18 @@ public class FittsButtonHandler : MonoBehaviour
         Debug.Log(Screen.height);
     }
 
+    // Increments time every frame
     void Update()
     {
         time += Time.deltaTime;
     }
 
+    // Functionality for going to the next button
     public void GoToNextButton(Button button)
     {
         UpdateClickData(button);
 
+        // Determines what the next button is
         if (currentButton == leftButton || currentButton == rightButton)
         {
             previousButton = currentButton;
@@ -84,18 +88,20 @@ public class FittsButtonHandler : MonoBehaviour
             currentButton = leftButton;
         }
 
+        // Adds a data entry if not in the tutorial
         if(!isTutorial)
             dataEntries.Add(new DataEntry(fileIOSystem.GetSubjectID(fileIOSystem.dir), inputButtonHandler.selectedButton.GetComponentInChildren<TMP_Text>().text, totalClicks, size, distance, CalculateIndexOfDifficulty(size, distance), time, successfulClick));
 
+        // Sets the colours of the buttons correctly
         previousButton.GetComponent<Image>().color = defaultColour;
         currentButton.GetComponent<Image>().color = activeColour;
         
-        Debug.Log(time);
         ResetTimer();
 
         UpdateSizeAndDistance(totalClicks);
     }
-
+    
+    // Updates data for each click
     private void UpdateClickData(Button button)
     {
         if (currentButton == button)
@@ -117,17 +123,20 @@ public class FittsButtonHandler : MonoBehaviour
         return Mathf.Log((distance / size) + 1, 2);
     }
 
+    // Resets the timer to 0
     public void ResetTimer()
     {
         time = 0;
     }
 
+    // Sets click data to 0
     public void ResetClickData()
     {
         successfulClicks = 0;
         errorClicks = 0;
         totalClicks = 0;
     }
+    // Resets the distance and size of buttons to default values
     public void ResetSizeAndDistance()
     {
         distance = 400;
@@ -136,8 +145,10 @@ public class FittsButtonHandler : MonoBehaviour
         ChangeWidth();
     }
 
+    // Swaps the tutorial state
     public void TutorialActive(bool tutorial) => isTutorial = tutorial;
 
+    // Updates the size and distance of buttons depending on the current click
     void UpdateSizeAndDistance(int clicks)
     {
         if (isTutorial)
@@ -188,11 +199,13 @@ public class FittsButtonHandler : MonoBehaviour
         }
     } 
 
+    // Changes the distances between buttons
     void ChangeDistances()
     {
         leftButton.transform.position = new Vector3(camera.ScreenToWorldPoint(new Vector3(Screen.width / 2 - distance, 0, 0)).x, 0, 0);
         rightButton.transform.position = new Vector3(camera.ScreenToWorldPoint(new Vector3(Screen.width / 2 + distance, 0, 0)).x, 0, 0);
     }
+    // Changes the width of the buttons
     void ChangeWidth()
     {
         Vector2 newWidth = new Vector2(size, middleRect.sizeDelta.y);
@@ -202,6 +215,7 @@ public class FittsButtonHandler : MonoBehaviour
     }
 }
 
+// Struct to carry data for each entry
 public struct DataEntry
 {
     public int subjectID;
