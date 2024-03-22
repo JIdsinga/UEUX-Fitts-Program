@@ -9,7 +9,7 @@ public class FittsButtonHandler : MonoBehaviour
     [SerializeField] Button leftButton;
     [SerializeField] Button middleButton;
     [SerializeField] Button rightButton;
-    [SerializeField] Button errorButton;
+    [SerializeField] public Button errorButton;
 
     Button currentButton;
     Button previousButton;
